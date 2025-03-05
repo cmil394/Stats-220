@@ -1,4 +1,3 @@
-# Stats-220
 # stats220
 
 This is my repo for STATS 220. 
