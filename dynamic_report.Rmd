@@ -46,6 +46,28 @@ p {
   margin-bottom: 30px;
 }
 ```
+cat("
+<style>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: red;
+}
+
+p {
+  font-size: 16px;
+}
+
+.bar-plot {
+  margin-bottom: 30px;
+}
+</style>
+")
 
 Examining YouTube Ad Types and Durations
 
