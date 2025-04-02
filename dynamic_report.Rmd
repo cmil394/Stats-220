@@ -46,29 +46,6 @@ p {
   margin-bottom: 30px;
 }
 ```
-cat("
-<style>
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  padding: 20px;
-}
-
-h2 {
-  text-align: center;
-  color: red;
-}
-
-p {
-  font-size: 16px;
-}
-
-.bar-plot {
-  margin-bottom: 30px;
-}
-</style>
-")
-
 Examining YouTube Ad Types and Durations
 
 As seen in the bar graph below the most common form of ad seen on YouTube from my small sample size was the skippable video ad with 16 out of the 20 ad types being skippable video ads. The other two were short unskippable ads and display ads that normally in the form of a banner and were not over top of the video.
