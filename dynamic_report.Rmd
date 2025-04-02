@@ -1,0 +1,75 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+
+library(tidyverse)
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSs5bOiy1YFGVakqIu7065G6PInrCbpzSmvtwdYTXCRD1xFBVIbpBibxNdYpj-W6NukShJSoJTXoMSv/pub?gid=1241107398&single=true&output=csv")
+
+latest_data <- logged_data %>%
+  rename(
+    timestamp = `Timestamp`,
+    ad_type = `What type of ad did you see?`,
+    ad_length = `What was the length of the ad? (Enter only the number in seconds)`,
+    ad_category = `What was the ad promoting?`
+  )
+
+ad_length_vector <- latest_data$ad_length
+max_value <- max(ad_length_vector)
+total_length <- sum(ad_length_vector)
+
+
+```
+
+```{css}
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+p {
+  font-size: 16px;
+}
+
+.bar-plot {
+  margin-bottom: 30px;
+}
+```
+
+<h2>Examining YouTube Ad Types and Durations</h2>
+
+<p>As seen in the bar graph below the most common form of ad seen on YouTube from my small sample size was the skippable video ad with 16 out of the 20 ad types being skippable video ads. The other two were short unskippable ads and display ads that normally in the form of a banner and were not over top of the video.</p>
+
+<h2>Ad types</h2>
+
+```{r}
+ggplot(latest_data, aes(x = ad_type)) +
+  geom_bar(fill = "blue") +
+  labs(title = "Count of Ad Types", x = "Ad Type", y = "Count") +
+  theme_minimal()
+
+
+```
+
+<p>The total ad length for all ads recorded in the 20 samples was `r paste(total_length)` seconds making the average for all `r paste(total_length / 20)` seconds however it would be interesting to see if it differs in each category as some types of ads may tend to be longer than others. In the next bar graph it measures the mean ad length by each category. The highest is education/courses ads however this was only a single ad that is adding to this data `r paste("which was ", max_value, "seconds")`. The next highest is Tech ads which has a decent sample size of 4 and still has a relatively high ad length.</p>
+
+<h2>Mean Ad Length by Category</h2>
+
+```{r}
+ggplot(latest_data, aes(x = ad_category, y = ad_length)) +
+  stat_summary(geom = "col", fun = "mean", fill = "purple") +
+  labs(title = "Mean Ad Length by Category", x = "Ad Category", y = "Mean Length (seconds)") +
+  theme_minimal()
+```
+
